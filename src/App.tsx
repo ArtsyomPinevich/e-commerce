@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/NavBar/NavBar';
+import Mock from './data/mockData/mockData.json';
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
         <>
             <Header />
