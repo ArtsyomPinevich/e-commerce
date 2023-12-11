@@ -9,12 +9,18 @@
     &__searchbar {
         display: flex;
         height: 32px;
+        padding-left: 6px;
         border-radius: 6px;
-        border: 2px solid #000000;
+        background-color: lightgray;
         overflow: hidden;
+        align-items: center;
+
+        svg {
+        }
 
         input {
             background-color: transparent;
+            padding: 4px 10px;
             border: transparent;
             flex: 1;
             &:focus {
