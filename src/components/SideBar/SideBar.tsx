@@ -3,18 +3,12 @@ import { useEffect, useState } from 'react';
 import './SideBar.scss';
 
 const SideBar = () => {
-    interface ICathegory {
-        name: string;
-        id: number;
-        image: string;
-    }
-    const [cathegories, setCathegories] = useState<ICathegory[]>([]);
+    const [cathegories, setCathegories] = useState([]);
 
     useEffect(() => {
-        fetch('https://api.escuelajs.co/api/v1/categories')
+        fetch('https://fakestoreapi.com/products/categories')
             .then((res) => res.json())
             .then((data) => setCathegories(data));
-        console.log(cathegories[0]);
     }, []);
 
     return (
@@ -26,7 +20,7 @@ const SideBar = () => {
                         <>
                             <li>
                                 <input type="checkbox" />
-                                {element.name}
+                                {element}
                             </li>
                         </>
                     );
