@@ -9,6 +9,7 @@ const Products = () => {
         price: number;
         image: string;
         rating: object;
+        category: string;
     }
 
     const [products, setProducts] = useState<Item[]>([]);
@@ -17,20 +18,20 @@ const Products = () => {
             const data = await fetch('https://fakestoreapi.com/products');
             const json = await data.json();
             setProducts(json);
-            console.log(products);
         };
 
         FetchData();
     }, []);
     return (
         <div className="products-section">
-            {products.map(({ title, price, image, rating }) => {
+            {products.map(({ title, price, image, rating, category }) => {
                 return (
                     <ProductCard
                         name={title}
                         price={price}
                         image={image}
                         rating={rating}
+                        category={category}
                     />
                 );
             })}
