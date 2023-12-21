@@ -16,9 +16,6 @@
         overflow: hidden;
         align-items: center;
 
-        svg {
-        }
-
         input {
             background-color: transparent;
             padding: 4px 10px;
@@ -61,8 +58,8 @@
 .user-cart {
     position: absolute;
     height: 100vh;
-    width: 300px;
-    background-color: aquamarine;
+    width: 500px;
+    background-color: white;
     right: 0;
     top: 0;
     position: fixed;

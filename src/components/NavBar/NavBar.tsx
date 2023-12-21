@@ -1,9 +1,11 @@
-import { useState } from 'react';
 import './NavBar.scss';
+import { useState } from 'react';
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5';
+import { useItemContext } from '../../context/ItemsContext';
 
 const Header = () => {
     const [cartIsOpen, setCartIsOpen] = useState<boolean>(false);
+    const { products } = useItemContext();
     return (
         <header className="header">
             {cartIsOpen ? (

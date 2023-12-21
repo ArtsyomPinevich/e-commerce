@@ -18,10 +18,9 @@ const Products = ({ selectedCathegory }) => {
     const selectedItems = selectedCathegory;
 
     // const [products, setProducts] = useState<Item[]>([]);
-    const { products, qweqwqeqweqweqweqw } = useItemContext();
-    console.log(qweqwqeqweqweqweqw);
+    const { products } = useItemContext();
 
-    const filterByCathegory = (products: Item, selectedItems: string) => {
+    const filterByCathegory = (products: Item, selectedItems: any) => {
         return selectedItems.length === 0
             ? products
             : products.filter((product: Item) =>

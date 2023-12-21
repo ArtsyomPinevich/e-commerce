@@ -6,7 +6,7 @@ export const useItemContext = () => {
     return useContext(ItemsContext);
 };
 
-export const itemsProvider = ({ children }: any) => {
+export const ItemsProvider = ({ children }: any) => {
     const [products, setProducts] = useState([]);
     const qweqwqeqweqweqweqw = 'tests';
 
