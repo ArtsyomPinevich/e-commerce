@@ -5,6 +5,7 @@
     padding-inline: 10%;
     margin: 0 auto;
     padding-block: 20px;
+    position: relative;
 
     &__searchbar {
         display: flex;
@@ -35,4 +36,34 @@
             cursor: pointer;
         }
     }
+
+    &__userCart {
+        button {
+            background-color: lightgray;
+            border: transparent;
+            border-radius: 8px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                cursor: pointer;
+                opacity: 0.86;
+            }
+        }
+
+        span {
+            padding-left: 8px;
+        }
+    }
+}
+
+.user-cart {
+    position: absolute;
+    height: 100vh;
+    width: 300px;
+    background-color: aquamarine;
+    right: 0;
+    top: 0;
+    position: fixed;
 }

@@ -1,40 +1,65 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
+import { useItemContext } from '../../context/ItemsContext';
 
 import './Products.scss';
 
-const Products = () => {
+const Products = ({ selectedCathegory }) => {
     interface Item {
+        id: number;
         title: string;
+        description: string;
         price: number;
         image: string;
         rating: object;
         category: string;
     }
 
-    const [products, setProducts] = useState<Item[]>([]);
-    useEffect(() => {
-        const FetchData = async () => {
-            const data = await fetch('https://fakestoreapi.com/products');
-            const json = await data.json();
-            setProducts(json);
-        };
+    const selectedItems = selectedCathegory;
 
-        FetchData();
-    }, []);
+    // const [products, setProducts] = useState<Item[]>([]);
+    const { products, qweqwqeqweqweqweqw } = useItemContext();
+    console.log(qweqwqeqweqweqweqw);
+
+    const filterByCathegory = (products: Item, selectedItems: string) => {
+        return selectedItems.length === 0
+            ? products
+            : products.filter((product: Item) =>
+                  selectedItems.includes(product.category)
+              );
+    };
+
+    const filteredItems = filterByCathegory(products, selectedItems);
+    useEffect(() => {
+        console.log(filteredItems);
+    }, [filteredItems]);
+
     return (
         <div className="products-section">
-            {products.map(({ title, price, image, rating, category }) => {
-                return (
-                    <ProductCard
-                        name={title}
-                        price={price}
-                        image={image}
-                        rating={rating}
-                        category={category}
-                    />
-                );
-            })}
+            {filteredItems.map(
+                ({
+                    id,
+                    title,
+                    description,
+                    price,
+                    image,
+                    rating,
+                    category,
+                }: Item) => {
+                    return (
+                        <ProductCard
+                            key={id}
+                            id={id}
+                            description={description}
+                            name={title}
+                            price={price}
+                            image={image}
+                            rating={rating}
+                            category={category}
+                        />
+                    );
+                }
+            )}
         </div>
     );
 };

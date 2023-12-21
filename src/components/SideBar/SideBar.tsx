@@ -1,10 +1,9 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState } from 'react';
 
 import './SideBar.scss';
 
-const SideBar = () => {
+const SideBar = ({ selectedCathegory, setSelectedCathegory }) => {
     const [cathegories, setCathegories] = useState<string[]>([]);
-    const [selectedCathegory, setSelectedCathegory] = useState<string[]>([]);
 
     useEffect(() => {
         fetch('https://fakestoreapi.com/products/categories')
@@ -22,7 +21,7 @@ const SideBar = () => {
             setSelectedCathegory([...selectedCathegory, cathegory]);
         } else {
             setSelectedCathegory(
-                selectedCathegory.filter((c) => c !== cathegory)
+                selectedCathegory.filter((c: string) => c !== cathegory)
             );
         }
     };
@@ -33,16 +32,14 @@ const SideBar = () => {
             <ul className="cathegories">
                 {cathegories.map((element) => {
                     return (
-                        <>
-                            <li>
-                                <input
-                                    value={element}
-                                    type="checkbox"
-                                    onChange={handleCheckboxChange}
-                                />
-                                {element}
-                            </li>
-                        </>
+                        <li key={element}>
+                            <input
+                                value={element}
+                                type="checkbox"
+                                onChange={handleCheckboxChange}
+                            />
+                            {element}
+                        </li>
                     );
                 })}
             </ul>

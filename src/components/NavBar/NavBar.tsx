@@ -1,10 +1,17 @@
-import React from 'react';
+import { useState } from 'react';
 import './NavBar.scss';
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5';
 
 const Header = () => {
+    const [cartIsOpen, setCartIsOpen] = useState<boolean>(false);
     return (
         <header className="header">
+            {cartIsOpen ? (
+                <div className="user-cart">
+                    <h1>user cart</h1>
+                    <button onClick={() => setCartIsOpen(false)}>close</button>
+                </div>
+            ) : null}
             <div className="header__searchbar-container">
                 <form className="header__searchbar">
                     <IoSearchOutline />
@@ -12,10 +19,10 @@ const Header = () => {
                 </form>
             </div>
 
-            <div className="Header__userCart">
-                <button>
+            <div className="header__userCart">
+                <button onClick={() => setCartIsOpen(true)}>
                     <IoCartOutline />
-                    user cart
+                    <span>user cart</span>
                 </button>
             </div>
         </header>

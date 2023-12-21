@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
 import Header from './components/NavBar/NavBar';
 import Main from './components/Main/Main';
+import { ShoppingCartProvider } from './context/ShoppingCartContext';
 
 function App() {
     return (
-        <div>
-            <Header />
-            <Main />
-        </div>
+        <ShoppingCartProvider>
+            <div>
+                <Header />
+                <Main />
+            </div>
+        </ShoppingCartProvider>
     );
 }
 
