@@ -29,9 +29,6 @@ const Products = ({ selectedCathegory }) => {
     };
 
     const filteredItems = filterByCathegory(products, selectedItems);
-    useEffect(() => {
-        console.log(filteredItems);
-    }, [filteredItems]);
 
     return (
         <div className="products-section">

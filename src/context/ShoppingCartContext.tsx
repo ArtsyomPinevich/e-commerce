@@ -71,9 +71,7 @@ export const ShoppingCartProvider = ({
 
     const removeFromCart = (id: number) => {
         setCartItems((currItems) => {
-            return currItems.filter((item) => {
-                item.id !== id;
-            });
+            return currItems.filter((item) => item.id !== id);
         });
     };
 

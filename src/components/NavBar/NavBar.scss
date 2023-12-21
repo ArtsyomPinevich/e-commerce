@@ -63,4 +63,27 @@
     right: 0;
     top: 0;
     position: fixed;
+
+    &__items-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__item {
+        display: flex;
+        margin-top: 20px;
+        background-color: antiquewhite;
+        width: 100%;
+        padding: 8px 16px;
+
+        &-img-wrapper {
+            height: 100%;
+            width: 20%;
+
+            img {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
 }

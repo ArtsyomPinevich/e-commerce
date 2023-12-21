@@ -8,7 +8,6 @@ export const useItemContext = () => {
 
 export const ItemsProvider = ({ children }: any) => {
     const [products, setProducts] = useState([]);
-    const qweqwqeqweqweqweqw = 'tests';
 
     useEffect(() => {
         const FetchData = async () => {
@@ -22,7 +21,7 @@ export const ItemsProvider = ({ children }: any) => {
     }, []);
 
     return (
-        <ItemsContext.Provider value={{ products, qweqwqeqweqweqweqw }}>
+        <ItemsContext.Provider value={{ products }}>
             {children}
         </ItemsContext.Provider>
     );
