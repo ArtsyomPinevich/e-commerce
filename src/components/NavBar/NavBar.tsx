@@ -1,26 +1,53 @@
 import './NavBar.scss';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { IoCartOutline, IoSearchOutline } from 'react-icons/io5';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
 import CartItem from '../cartItem/CartItem';
+import {
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    useDisclosure,
+    Button,
+    Text,
+} from '@chakra-ui/react';
 
 const Header = () => {
     const [cartIsOpen, setCartIsOpen] = useState<boolean>(false);
     const { cartTotalQuantity, cartItems } = useShoppingCart();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const btnRef = useRef();
     return (
         <header className="header">
-            {cartIsOpen ? (
-                <div className="user-cart">
-                    <h1>user cart</h1>
-                    <div className="user-cart__items-container">
+            <Drawer
+                isOpen={isOpen}
+                placement="right"
+                onClose={onClose}
+                size="lg"
+                finalFocusRef={btnRef}
+            >
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>Your cart</DrawerHeader>
+
+                    <DrawerBody>
                         {cartItems.map((item) => {
                             return <CartItem key={item.id} {...item} />;
                         })}
-                    </div>
-                    <h3>total quantity {cartTotalQuantity}</h3>
-                    <button onClick={() => setCartIsOpen(false)}>close</button>
-                </div>
-            ) : null}
+                        <Text>total quantity {cartTotalQuantity}</Text>
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                        <Button colorScheme="blue">Complete order</Button>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
+
             <div className="header__searchbar-container">
                 <form className="header__searchbar">
                     <IoSearchOutline />
@@ -29,10 +56,9 @@ const Header = () => {
             </div>
 
             <div className="header__userCart">
-                <button onClick={() => setCartIsOpen(true)}>
-                    <IoCartOutline />
-                    <span>user cart</span>
-                </button>
+                <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+                    Open Cart
+                </Button>
             </div>
         </header>
     );

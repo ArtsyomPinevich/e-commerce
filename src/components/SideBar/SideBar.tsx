@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react';
 
 import './SideBar.scss';
 
@@ -33,12 +34,12 @@ const SideBar = ({ selectedCathegory, setSelectedCathegory }) => {
                 {cathegories.map((element) => {
                     return (
                         <li key={element}>
-                            <input
+                            <Checkbox
                                 value={element}
-                                type="checkbox"
                                 onChange={handleCheckboxChange}
-                            />
-                            {element}
+                            >
+                                {element}
+                            </Checkbox>
                         </li>
                     );
                 })}

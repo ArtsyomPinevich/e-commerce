@@ -56,13 +56,12 @@
 }
 
 .user-cart {
-    position: absolute;
-    height: 100vh;
+    position: fixed;
+    height: 100%;
     width: 500px;
     background-color: white;
     right: 0;
     top: 0;
-    position: fixed;
 
     &__items-container {
         display: flex;
