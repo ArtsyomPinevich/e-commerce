@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import { useItemContext } from '../../context/ItemsContext';
 
 import './Products.scss';
-
-const Products = ({ selectedCathegory }) => {
+//todo fix
+const Products = ({ selectedCathegory }: any) => {
     interface Item {
         id: number;
         title: string;
@@ -17,13 +16,14 @@ const Products = ({ selectedCathegory }) => {
 
     const selectedItems = selectedCathegory;
 
-    // const [products, setProducts] = useState<Item[]>([]);
-    const { products } = useItemContext();
+    //to do fix
+    const { products }: any = useItemContext();
 
-    const filterByCathegory = (products: Item, selectedItems: any) => {
+    const filterByCathegory = (products: Item[], selectedItems: Item[]) => {
         return selectedItems.length === 0
             ? products
-            : products.filter((product: Item) =>
+            : //todo fix
+              products.filter((product: any) =>
                   selectedItems.includes(product.category)
               );
     };

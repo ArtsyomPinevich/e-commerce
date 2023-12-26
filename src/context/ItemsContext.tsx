@@ -1,13 +1,33 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import {
+    createContext,
+    useContext,
+    useState,
+    useEffect,
+    ReactNode,
+} from 'react';
 
 const ItemsContext = createContext({});
+
+interface Item {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    image: string;
+    rating: object;
+    category: string;
+}
+
+type ItemsContextProviderProps = {
+    children: ReactNode;
+};
 
 export const useItemContext = () => {
     return useContext(ItemsContext);
 };
 
-export const ItemsProvider = ({ children }: any) => {
-    const [products, setProducts] = useState([]);
+export const ItemsProvider = ({ children }: ItemsContextProviderProps) => {
+    const [products, setProducts] = useState<Item[]>([]);
 
     useEffect(() => {
         const FetchData = async () => {

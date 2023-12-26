@@ -1,7 +1,7 @@
 import './NavBar.scss';
-import { useState, useRef } from 'react';
-import { IoCartOutline, IoSearchOutline } from 'react-icons/io5';
+import { useState } from 'react';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
+import { useItemContext } from '../../context/ItemsContext';
 import CartItem from '../cartItem/CartItem';
 import {
     Drawer,
@@ -14,13 +14,41 @@ import {
     useDisclosure,
     Button,
     Text,
+    Input,
+    Heading,
+    Alert,
+    AlertTitle,
+    AlertDescription,
+    AlertIcon,
 } from '@chakra-ui/react';
 
+type cartItemType = {
+    id: number;
+    quantity: number;
+};
+
 const Header = () => {
-    const [cartIsOpen, setCartIsOpen] = useState<boolean>(false);
-    const { cartTotalQuantity, cartItems } = useShoppingCart();
+    const { cartTotalQuantity, cartItems, removeAllFromCart } =
+        useShoppingCart();
+    //to do fix
+    const { products }: any = useItemContext();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const btnRef = useRef();
+
+    const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false);
+
+    const setAlertVisibility = () => {
+        if (cartItems.length >= 1) {
+            removeAllFromCart();
+
+            setIsAlertVisible(true);
+            setTimeout(() => {
+                setIsAlertVisible(false);
+            }, 4000);
+        } else {
+            return;
+        }
+    };
+
     return (
         <header className="header">
             <Drawer
@@ -28,7 +56,6 @@ const Header = () => {
                 placement="right"
                 onClose={onClose}
                 size="lg"
-                finalFocusRef={btnRef}
             >
                 <DrawerOverlay />
                 <DrawerContent>
@@ -40,23 +67,58 @@ const Header = () => {
                             return <CartItem key={item.id} {...item} />;
                         })}
                         <Text>total quantity {cartTotalQuantity}</Text>
+                        <Heading size="lg">
+                            Total Price:
+                            {cartItems.reduce((total, cartItems) => {
+                                const item = products.find(
+                                    (i: cartItemType) => i.id === cartItems.id
+                                );
+                                return (
+                                    total +
+                                    (item?.price || 0) * cartItems.quantity
+                                );
+                            }, 0)}
+                            $
+                        </Heading>
                     </DrawerBody>
 
-                    <DrawerFooter>
-                        <Button colorScheme="blue">Complete order</Button>
+                    <DrawerFooter flexDirection="column">
+                        <Alert
+                            display={isAlertVisible ? 'block' : 'none'}
+                            status="success"
+                            variant="subtle"
+                            flexDirection="column"
+                            alignItems="center"
+                            justifyContent="center"
+                            textAlign="center"
+                            height="200px"
+                        >
+                            <AlertIcon boxSize="40px" mr={0} />
+                            <AlertTitle mt={4} mb={1} fontSize="lg">
+                                Order completed!
+                            </AlertTitle>
+                            <AlertDescription maxWidth="sm">
+                                Thanks for your order!
+                            </AlertDescription>
+                        </Alert>
+
+                        <Button
+                            marginTop="3"
+                            colorScheme="blue"
+                            onClick={() => setAlertVisibility()}
+                        >
+                            Complete order
+                        </Button>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>
 
             <div className="header__searchbar-container">
-                <form className="header__searchbar">
-                    <IoSearchOutline />
-                    <input type="text" placeholder="Search item" />
-                </form>
+                <Input type="text" placeholder="Search item" />
             </div>
 
             <div className="header__userCart">
-                <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
+                <Button colorScheme="teal" onClick={onOpen}>
                     Open Cart
                 </Button>
             </div>

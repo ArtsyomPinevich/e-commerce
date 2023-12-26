@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react';
+import { Checkbox } from '@chakra-ui/react';
 
 import './SideBar.scss';
 
-const SideBar = ({ selectedCathegory, setSelectedCathegory }) => {
+//todo fix
+const SideBar = ({ selectedCathegory, setSelectedCathegory }: any) => {
     const [cathegories, setCathegories] = useState<string[]>([]);
 
     useEffect(() => {
