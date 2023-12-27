@@ -1,7 +1,9 @@
 import ProductCard from '../ProductCard/ProductCard';
-import { useItemContext } from '../../context/ItemsContext';
-
 import './Products.scss';
+
+import { useItemContext } from '../../context/ItemsContext';
+import { Spinner } from '@chakra-ui/react';
+
 //todo fix
 const Products = ({ selectedCathegory }: any) => {
     interface Item {
@@ -17,7 +19,7 @@ const Products = ({ selectedCathegory }: any) => {
     const selectedItems = selectedCathegory;
 
     //to do fix
-    const { products }: any = useItemContext();
+    const { products, isDataLoading }: any = useItemContext();
 
     const filterByCathegory = (products: Item[], selectedItems: Item[]) => {
         return selectedItems.length === 0
@@ -32,29 +34,33 @@ const Products = ({ selectedCathegory }: any) => {
 
     return (
         <div className="products-section">
-            {filteredItems.map(
-                ({
-                    id,
-                    title,
-                    description,
-                    price,
-                    image,
-                    rating,
-                    category,
-                }: Item) => {
-                    return (
-                        <ProductCard
-                            key={id}
-                            id={id}
-                            description={description}
-                            name={title}
-                            price={price}
-                            image={image}
-                            rating={rating}
-                            category={category}
-                        />
-                    );
-                }
+            {isDataLoading ? (
+                <Spinner size="xl" />
+            ) : (
+                filteredItems.map(
+                    ({
+                        id,
+                        title,
+                        description,
+                        price,
+                        image,
+                        rating,
+                        category,
+                    }: Item) => {
+                        return (
+                            <ProductCard
+                                key={id}
+                                id={id}
+                                description={description}
+                                name={title}
+                                price={price}
+                                image={image}
+                                rating={rating}
+                                category={category}
+                            />
+                        );
+                    }
+                )
             )}
         </div>
     );
