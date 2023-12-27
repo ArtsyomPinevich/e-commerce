@@ -28,12 +28,17 @@ export const useItemContext = () => {
 
 export const ItemsProvider = ({ children }: ItemsContextProviderProps) => {
     const [products, setProducts] = useState<Item[]>([]);
+    const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const FetchData = async () => {
+            setIsDataLoading(true);
+
             const data = await fetch('https://fakestoreapi.com/products');
             const json = await data.json();
             setProducts(json);
+
+            setIsDataLoading(false);
             console.log('data fetched');
         };
 
@@ -41,7 +46,7 @@ export const ItemsProvider = ({ children }: ItemsContextProviderProps) => {
     }, []);
 
     return (
-        <ItemsContext.Provider value={{ products }}>
+        <ItemsContext.Provider value={{ products, isDataLoading }}>
             {children}
         </ItemsContext.Provider>
     );
