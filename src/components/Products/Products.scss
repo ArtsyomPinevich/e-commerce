@@ -1,13 +1,8 @@
 .products-section {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-}
-//to do fix
-@media (max-width: 1500px) {
-    .products-section {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
 @media (max-width: 1260px) {
@@ -21,16 +16,6 @@
 
     .sidebar {
         max-width: 100%;
-    }
-
-    .products-section {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 1000px) {
-    .products-section {
-        grid-template-columns: repeat(2, 1fr);
     }
 }
 
