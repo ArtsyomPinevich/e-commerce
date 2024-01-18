@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import {
     Card,
     Heading,
-    ButtonGroup,
     Button,
     Image,
     Text,
@@ -36,6 +35,7 @@ const ProductCard = (props: any) => {
     };
 
     const quantity = getItemQuantity(props.id);
+
     return (
         <Card maxW="sm">
             <CardBody>
@@ -65,51 +65,46 @@ const ProductCard = (props: any) => {
                         >
                             ${props.price}
                         </Text>
-                        <Text fontSize="2xl">
-                            <Button
-                                marginRight="5"
-                                onClick={() => {
-                                    increaseCartQuantity(props.id);
-                                    notify(
-                                        'You have removed one piece of this product from your cart!'
-                                    );
-                                }}
-                            >
-                                +1
-                            </Button>
-                            {quantity}
-                            <Button
-                                marginLeft="5"
-                                onClick={() => {
-                                    decreaseCartQuantity(props.id);
-                                    notify(
-                                        'You have removed one piece of this product from your cart!'
-                                    );
-                                }}
-                            >
-                                -1
-                            </Button>{' '}
-                            in cart
-                        </Text>
-                        <Text>
-                            <Button
-                                marginTop="2"
-                                onClick={() => {
-                                    removeFromCart(props.id);
-                                    notify(
-                                        'Нou have completely removed this item from your cart!'
-                                    );
-                                }}
-                            >
-                                removeFromCart
-                            </Button>
-                        </Text>
                     </Flex>
                 </Flex>
             </CardBody>
             <Divider />
-            <CardFooter>
-                <ButtonGroup spacing="2">
+
+            <CardFooter flexDirection="column">
+                <Text fontSize="2xl" display="flex" alignItems="center">
+                    {quantity} in cart
+                    <Button
+                        marginLeft={2}
+                        onClick={() => {
+                            increaseCartQuantity(props.id);
+                            notify(
+                                'You have removed one piece of this product from your cart!'
+                            );
+                        }}
+                    >
+                        +1
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            decreaseCartQuantity(props.id);
+                            {
+                                quantity > 0 &&
+                                    notify(
+                                        'You have removed one piece of this product from your cart!'
+                                    );
+                            }
+                        }}
+                    >
+                        -1
+                    </Button>
+                </Text>
+                <Flex
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    flex="1"
+                    marginTop={2}
+                >
                     <Button
                         variant="solid"
                         colorScheme="blue"
@@ -122,7 +117,18 @@ const ProductCard = (props: any) => {
                     >
                         Add to cart
                     </Button>
-                </ButtonGroup>
+                    {quantity > 0 && (
+                        <Button
+                            variant="solid"
+                            colorScheme="red"
+                            onClick={() => {
+                                removeFromCart(props.id);
+                            }}
+                        >
+                            removeFromCart
+                        </Button>
+                    )}
+                </Flex>
             </CardFooter>
         </Card>
     );
