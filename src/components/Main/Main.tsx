@@ -1,7 +1,7 @@
-import SideBar from '../SideBar/SideBar';
 import './Main.scss';
-import Products from '../Products/Products';
 import { useState } from 'react';
+import SideBar from '../SideBar/SideBar';
+import Products from '../Products/Products';
 
 const Main = () => {
     //rewrite this with usecontext

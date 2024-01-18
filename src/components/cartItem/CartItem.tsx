@@ -9,6 +9,7 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { toast } from 'react-toastify';
+import { formatCurrency } from '../../utils/currencyFormat';
 
 interface ICartItem {
     id: number;
@@ -72,7 +73,7 @@ const CartItem = ({ id, quantity }: ICartItem) => {
                     <Text>
                         Price:{' '}
                         <Text as="span" color="blue.600" fontSize="2xl">
-                            ${quantity * item.price}
+                            {formatCurrency(quantity * item.price)}
                         </Text>
                     </Text>
                 </Flex>

@@ -21,6 +21,7 @@ import {
     AlertDescription,
     AlertIcon,
 } from '@chakra-ui/react';
+import { formatCurrency } from '../../utils/currencyFormat';
 
 type cartItemType = {
     id: number;
@@ -69,16 +70,18 @@ const Header = () => {
                         <Text>total quantity {cartTotalQuantity}</Text>
                         <Heading size="lg">
                             Total Price:
-                            {cartItems.reduce((total, cartItems) => {
-                                const item = products.find(
-                                    (i: cartItemType) => i.id === cartItems.id
-                                );
-                                return (
-                                    total +
-                                    (item?.price || 0) * cartItems.quantity
-                                );
-                            }, 0)}
-                            $
+                            {formatCurrency(
+                                cartItems.reduce((total, cartItems) => {
+                                    const item = products.find(
+                                        (i: cartItemType) =>
+                                            i.id === cartItems.id
+                                    );
+                                    return (
+                                        total +
+                                        (item?.price || 0) * cartItems.quantity
+                                    );
+                                }, 0)
+                            )}
                         </Heading>
                     </DrawerBody>
 
@@ -114,7 +117,11 @@ const Header = () => {
             </Drawer>
 
             <div className="header__searchbar-container">
-                <Input type="text" placeholder="Search item" />
+                <Input
+                    type="text"
+                    placeholder="Search item"
+                    visibility="hidden"
+                />
             </div>
 
             <div className="header__userCart">
