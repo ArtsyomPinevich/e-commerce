@@ -1,16 +1,27 @@
 import { useEffect, useState } from 'react';
-import { Checkbox } from '@chakra-ui/react';
+import { Checkbox, Spinner } from '@chakra-ui/react';
 
 import './SideBar.scss';
 
 //todo fix
 const SideBar = ({ selectedCathegory, setSelectedCathegory }: any) => {
     const [cathegories, setCathegories] = useState<string[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products/categories')
-            .then((res) => res.json())
-            .then((data) => setCathegories(data));
+        const FetchData = async () => {
+            setIsLoading(true);
+
+            const data = await fetch(
+                'https://fakestoreapi.com/products/categories'
+            );
+            const json = await data.json();
+            setCathegories(json);
+
+            setIsLoading(false);
+        };
+
+        FetchData();
     }, []);
 
     const handleCheckboxChange = (
@@ -32,18 +43,22 @@ const SideBar = ({ selectedCathegory, setSelectedCathegory }: any) => {
         <div className="sidebar">
             <h3>Filter items by catheory</h3>
             <ul className="cathegories">
-                {cathegories.map((element) => {
-                    return (
-                        <li key={element}>
-                            <Checkbox
-                                value={element}
-                                onChange={handleCheckboxChange}
-                            >
-                                {element}
-                            </Checkbox>
-                        </li>
-                    );
-                })}
+                {isLoading ? (
+                    <Spinner size="xl" />
+                ) : (
+                    cathegories.map((element) => {
+                        return (
+                            <li key={element}>
+                                <Checkbox
+                                    value={element}
+                                    onChange={handleCheckboxChange}
+                                >
+                                    {element}
+                                </Checkbox>
+                            </li>
+                        );
+                    })
+                )}
             </ul>
         </div>
     );

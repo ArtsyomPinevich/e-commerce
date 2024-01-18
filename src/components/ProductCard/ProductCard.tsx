@@ -25,7 +25,7 @@ const ProductCard = (props: any) => {
     const notify = (toastDescription: string) => {
         toast.success(toastDescription, {
             position: 'top-left',
-            autoClose: 1500,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -46,6 +46,7 @@ const ProductCard = (props: any) => {
                         alt={props.name}
                         borderRadius="lg"
                         boxSize="150px"
+                        loading="lazy"
                     />
                 </Flex>
                 <Flex mt="6" direction="column" justify="space-between">
