@@ -2,7 +2,7 @@ import ProductCard from '../ProductCard/ProductCard';
 import './Products.scss';
 
 import { useItemContext } from '../../context/ItemsContext';
-import { Spinner } from '@chakra-ui/react';
+import { Spinner, Skeleton, Stack } from '@chakra-ui/react';
 
 //todo fix
 const Products = ({ selectedCathegory }: any) => {
@@ -35,7 +35,15 @@ const Products = ({ selectedCathegory }: any) => {
     return (
         <div className="products-section">
             {isDataLoading ? (
-                <Spinner size="xl" />
+                <Stack display="flex" direction="row" flexWrap="wrap">
+                    <Skeleton height="400px" width="250px" />
+                    <Skeleton height="400px" width="250px" />
+                    <Skeleton height="400px" width="250px" />
+                    <Skeleton height="400px" width="250px" />
+                    <Skeleton height="400px" width="250px" />
+                    <Skeleton height="400px" width="250px" />
+                    <Skeleton height="400px" width="250px" />
+                </Stack>
             ) : (
                 filteredItems.map(
                     ({

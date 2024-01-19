@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Checkbox, Spinner } from '@chakra-ui/react';
+import { Checkbox, Stack, Skeleton } from '@chakra-ui/react';
 
 import './SideBar.scss';
 
@@ -44,7 +44,12 @@ const SideBar = ({ selectedCathegory, setSelectedCathegory }: any) => {
             <h3>Filter items by catheory</h3>
             <ul className="cathegories">
                 {isLoading ? (
-                    <Spinner size="xl" />
+                    <Stack>
+                        <Skeleton height="30px" />
+                        <Skeleton height="30px" />
+                        <Skeleton height="30px" />
+                        <Skeleton height="30px" />
+                    </Stack>
                 ) : (
                     cathegories.map((element) => {
                         return (
