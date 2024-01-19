@@ -2,7 +2,7 @@ import ProductCard from '../ProductCard/ProductCard';
 import './Products.scss';
 
 import { useItemContext } from '../../context/ItemsContext';
-import { Spinner, Skeleton, Stack } from '@chakra-ui/react';
+import { Skeleton, Stack } from '@chakra-ui/react';
 
 //todo fix
 const Products = ({ selectedCathegory }: any) => {
