@@ -28,7 +28,7 @@ export const useItemContext = () => {
 
 export const ItemsProvider = ({ children }: ItemsContextProviderProps) => {
     const [products, setProducts] = useState<Item[]>([]);
-    const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
+    const [isDataLoading, setIsDataLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const FetchData = async () => {
