@@ -58,23 +58,31 @@ const ProductCard = (props: any) => {
                         </Text>
                     </Flex>
 
-                    <Flex direction="column">
-                        <Text
-                            color="blue.600"
-                            fontSize="2xl"
-                            justifySelf="flex-end"
-                        >
-                            {formatCurrency(props.price)}
-                        </Text>
-                    </Flex>
+                    <Flex direction="column"></Flex>
                 </Flex>
             </CardBody>
-            <Divider />
 
             <CardFooter flexDirection="column">
-                <Text fontSize="2xl" display="flex" alignItems="center">
+                <Text
+                    color="blue.600"
+                    fontSize="2xl"
+                    justifySelf="flex-end"
+                    paddingBlock={2}
+                >
+                    {formatCurrency(props.price)}
+                </Text>
+                <Divider />
+                <Text
+                    fontSize="2xl"
+                    display="flex"
+                    alignItems="center"
+                    marginTop={2}
+                >
                     {quantity} in cart
                     <Button
+                        colorScheme="teal"
+                        variant="ghost"
+                        size="sm"
                         marginLeft={2}
                         onClick={() => {
                             increaseCartQuantity(props.id);
@@ -86,6 +94,9 @@ const ProductCard = (props: any) => {
                         +1
                     </Button>
                     <Button
+                        colorScheme="red"
+                        variant="ghost"
+                        size="sm"
                         onClick={() => {
                             decreaseCartQuantity(props.id);
                             {
