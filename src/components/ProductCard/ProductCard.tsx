@@ -11,6 +11,7 @@ import {
     Divider,
     Flex,
 } from '@chakra-ui/react';
+import { formatCurrency } from '../../utils/currencyFormat';
 
 //to do fix
 const ProductCard = (props: any) => {
@@ -63,7 +64,7 @@ const ProductCard = (props: any) => {
                             fontSize="2xl"
                             justifySelf="flex-end"
                         >
-                            ${props.price}
+                            {formatCurrency(props.price)}
                         </Text>
                     </Flex>
                 </Flex>
